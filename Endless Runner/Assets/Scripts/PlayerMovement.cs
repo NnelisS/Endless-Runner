@@ -5,11 +5,17 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     
-    [SerializeField] private float move_speed;
+    [SerializeField, Tooltip("Player's max speed.")] 
+    private float max_speed;
+    [SerializeField, Tooltip("Smoothness of the movement.")]
+    private float smoothness;
 
     private Rigidbody rb;
 
-    private float x_dir;
+    private Vector3 current_vector;
+    private Vector3 smooth_vector;
+    private Vector3 vel;
+   
 
     void Start()
     {
@@ -18,12 +24,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        x_dir = Input.GetAxis("Horizontal");
+        float x_dir = Input.GetAxis("Horizontal");
+
+        smooth_vector = Vector3.SmoothDamp(smooth_vector, new Vector3(x_dir, 0, 0), ref vel, smoothness);
+        current_vector = new Vector3(smooth_vector.x, 0, 0);
     }
     void FixedUpdate()
     {
-        Debug.Log(x_dir);
-        rb.AddForce(x_dir * move_speed,0,0);
-        
+
+        rb.MovePosition(transform.position + (current_vector * max_speed * Time.fixedDeltaTime));
     }
 }
