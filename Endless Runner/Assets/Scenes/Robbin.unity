@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700014371}
   m_LocalRotation: {x: 0.16155449, y: -0, z: -0, w: 0.98686385}
-  m_LocalPosition: {x: -0.64, y: 8.7, z: -12.4}
+  m_LocalPosition: {x: -0.64, y: 7.52, z: -8.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -439,8 +439,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269172920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.82, z: 0}
-  m_LocalScale: {x: 0.64586, y: 1.9437157, z: 0.64586}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 0.5, y: 2, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -457,7 +457,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624ae921472afc944a96589fa0867359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move_speed: 10
+  max_speed: 6.5
+  smoothness: 0.12
+  jump_force: 10
+  gravity: 1
+  fall_modifier: 1
+  ground_layer_mask:
+    serializedVersion: 2
+    m_Bits: 128
+  hip_height: 1
+  onGround: 0
 --- !u!1 &1829877742
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +479,7 @@ GameObject:
   - component: {fileID: 1829877745}
   - component: {fileID: 1829877744}
   - component: {fileID: 1829877743}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -549,7 +558,7 @@ Transform:
   m_GameObject: {fileID: 1829877742}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.9697, y: 2.9697, z: -0.62265706}
+  m_LocalScale: {x: 4.2903256, y: 2.9697, z: -0.33439174}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
