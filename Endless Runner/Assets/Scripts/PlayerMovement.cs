@@ -63,4 +63,11 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(transform.position + (current_vector * max_speed * Time.fixedDeltaTime));
         rb.velocity += Vector3.up * Physics.gravity.y * fall_modifier * Time.fixedDeltaTime;
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * hip_height);
+    }
+
 }
