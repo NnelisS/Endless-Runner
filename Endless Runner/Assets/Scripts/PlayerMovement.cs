@@ -7,14 +7,14 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Attributes")]
     [SerializeField, Tooltip("Player's max speed.")] 
     private float max_speed = 6.5f;
-    [SerializeField, Tooltip("Amount of drag.")]
-    private float linear_drag = 0.12f;
-    [SerializeField, Tooltip("Gravity.")]
-    private float gravity_scale;
+    [SerializeField, Tooltip("Smoothness of the movement.")]
+    private float smoothness = 0.12f;
     [SerializeField, Tooltip("Jump Force.")]
     private float jump_force;
     [SerializeField, Tooltip("Jump modifier.")]
     private float fall_modifier = 5f;
+    [SerializeField, Tooltip("Rotate speed.")]
+    private float rotate_speed = 5f;
 
     [Header("Settings")]
     [SerializeField, Tooltip("Ground Layer Mask.")]
@@ -26,11 +26,12 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 current_vector;
     private Vector3 smooth_vector;
+    private float x_dir;
     private Vector3 vel;
 
-    private bool onGround = false;
 
-    private float global_gravity = -9.81f;
+    private bool facing_right = true;
+    private bool on_ground = false;
 
     void Start()
     {
@@ -42,17 +43,19 @@ public class PlayerMovement : MonoBehaviour
         //Raycast to check if player is on the ground.
         RaycastHit hit;
 
-        onGround = Physics.SphereCast(transform.position, 0.25f, Vector2.down, out hit, hip_height, ground_layer_mask);
+        on_ground = Physics.SphereCast(transform.position, 0.25f, Vector2.down, out hit, hip_height, ground_layer_mask);
 
-        float x_dir = Input.GetAxis("Horizontal");
-
-        current_vector = new Vector3(x_dir, 0, 0);
+         x_dir = Input.GetAxis("Horizontal");
+        smooth_vector = Vector3.SmoothDamp(smooth_vector, new Vector3(x_dir, 0, 0), ref vel, smoothness);
+        current_vector = new Vector3(smooth_vector.x, 0, 0);
 
         //When spacebar is pressed and the player is on the ground call the jump function.
-        if (Input.GetButtonDown("Jump") && onGround)
+        if (Input.GetButtonDown("Jump") && on_ground)
         {
             Jump();
         }
+
+        Rotate();
     }
 
     void Jump()
@@ -62,29 +65,24 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
-        Vector3 gravity = global_gravity * gravity_scale * Vector3.up;
-        rb.AddForce(gravity, ForceMode.Acceleration); 
+    { 
 
-        rb.AddForce(Vector2.right * current_vector * max_speed);
-
-        if (Mathf.Abs(rb.velocity.x) > max_speed)
+        if((x_dir > 0 && facing_right) || (x_dir < 0 && !facing_right))
         {
-            rb.velocity = new Vector3(Mathf.Sign(rb.velocity.x) * max_speed, rb.velocity.y, 0);
+            facing_right = !facing_right;
         }
 
-        bool changing_directions = (current_vector.x > 0 && rb.velocity.x < 0) || (current_vector.x < 0 && rb.velocity.x > 0);
-
-        if(Mathf.Abs(current_vector.x) < 0.4f || changing_directions)
-        {
-            rb.drag = linear_drag;
-        }
-        else
-        {
-            rb.drag = 0f;
-        }
-
+        rb.MovePosition(transform.position + (current_vector * max_speed * Time.fixedDeltaTime));
         rb.velocity += Vector3.up * Physics.gravity.y * fall_modifier * Time.fixedDeltaTime;
+    }
+
+    void Rotate()
+    {
+
+        Quaternion torotation = Quaternion.Euler(0, facing_right ? 90 : 270, 0);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, torotation, rotate_speed * Time.deltaTime);
+
     }
 
     private void OnDrawGizmos()
