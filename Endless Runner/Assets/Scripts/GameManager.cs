@@ -10,12 +10,10 @@ public class GameManager : MonoBehaviour
     public bool playing = false;
     private float timer;
 
-    /*public Animator playerAnim;*/
+    public Animator playerAnim;
 
     public GameObject holdDPanel;
     private bool dPanelOff = false;
-
-    private float holdDStart = 3.0f;
 
     private void Update()
     {
@@ -24,7 +22,10 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             dPanelOff = true;
-            /*playerAnim.Play("Position");*/
+        }
+        else
+        {
+            playerAnim.StopPlayback();
         }
 
         if (playing)
@@ -44,10 +45,6 @@ public class GameManager : MonoBehaviour
 
     private void HoldD()
     {
-        holdDStart -= Time.deltaTime;
-        if (holdDStart <= 0f)
-        {
-            holdDPanel.SetActive(true);
-        }
+        holdDPanel.SetActive(true);   
     }
 }

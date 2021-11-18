@@ -176,6 +176,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max_speed: 6.5
   smoothness: 0.12
+  jump_force: 10
+  gravity: 0
+  fall_modifier: 1
+  ground_layer_mask:
+    serializedVersion: 2
+    m_Bits: 128
+  hip_height: 1
+  onGround: 0
 --- !u!54 &64641689
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -252,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1143846423}
   playing: 1
+  playerAnim: {fileID: 64641687}
   holdDPanel: {fileID: 530113956}
 --- !u!4 &126957726
 Transform:
@@ -733,7 +742,7 @@ GameObject:
   - component: {fileID: 1123649329}
   - component: {fileID: 1123649328}
   - component: {fileID: 1123649327}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
