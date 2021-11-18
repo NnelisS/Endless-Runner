@@ -7,15 +7,17 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Attributes")]
     [SerializeField, Tooltip("Player's max speed.")] 
     private float max_speed = 6.5f;
-    [SerializeField, Tooltip("Smoothness of the movement.")]
-    private float smoothness = 0.12f;
-    [SerializeField, Tooltip("Jump Force")]
+    [SerializeField, Tooltip("Amount of drag.")]
+    private float linear_drag = 0.12f;
+    [SerializeField, Tooltip("Gravity.")]
+    private float gravity_scale;
+    [SerializeField, Tooltip("Jump Force.")]
     private float jump_force;
-    [SerializeField, Tooltip("Jump modifier")]
+    [SerializeField, Tooltip("Jump modifier.")]
     private float fall_modifier = 5f;
 
     [Header("Settings")]
-    [SerializeField, Tooltip("Ground Layer Mask")]
+    [SerializeField, Tooltip("Ground Layer Mask.")]
     private LayerMask ground_layer_mask;
     [SerializeField, Tooltip("Height from hips to ground.")]
     private float hip_height;
@@ -27,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 vel;
 
     private bool onGround = false;
+
+    private float global_gravity = -9.81f;
 
     void Start()
     {
@@ -42,8 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
         float x_dir = Input.GetAxis("Horizontal");
 
-        smooth_vector = Vector3.SmoothDamp(smooth_vector, new Vector3(x_dir, 0, 0), ref vel, smoothness);
-        current_vector = new Vector3(smooth_vector.x, 0, 0);
+        current_vector = new Vector3(x_dir, 0, 0);
 
         //When spacebar is pressed and the player is on the ground call the jump function.
         if (Input.GetButtonDown("Jump") && onGround)
@@ -60,7 +63,27 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(transform.position + (current_vector * max_speed * Time.fixedDeltaTime));
+        Vector3 gravity = global_gravity * gravity_scale * Vector3.up;
+        rb.AddForce(gravity, ForceMode.Acceleration); 
+
+        rb.AddForce(Vector2.right * current_vector * max_speed);
+
+        if (Mathf.Abs(rb.velocity.x) > max_speed)
+        {
+            rb.velocity = new Vector3(Mathf.Sign(rb.velocity.x) * max_speed, rb.velocity.y, 0);
+        }
+
+        bool changing_directions = (current_vector.x > 0 && rb.velocity.x < 0) || (current_vector.x < 0 && rb.velocity.x > 0);
+
+        if(Mathf.Abs(current_vector.x) < 0.4f || changing_directions)
+        {
+            rb.drag = linear_drag;
+        }
+        else
+        {
+            rb.drag = 0f;
+        }
+
         rb.velocity += Vector3.up * Physics.gravity.y * fall_modifier * Time.fixedDeltaTime;
     }
 
