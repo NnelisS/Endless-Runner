@@ -11,11 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private float smoothness = 0.12f;
     [SerializeField, Tooltip("Jump Force")]
     private float jump_force;
-    [SerializeField, Tooltip("Jump Gravity")]
-    private float gravity = 1f;
     [SerializeField, Tooltip("Jump modifier")]
     private float fall_modifier = 5f;
-
 
     [Header("Settings")]
     [SerializeField, Tooltip("Ground Layer Mask")]
@@ -23,14 +20,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Tooltip("Height from hips to ground.")]
     private float hip_height;
 
-
     private Rigidbody rb;
 
     private Vector3 current_vector;
     private Vector3 smooth_vector;
     private Vector3 vel;
 
-    [SerializeField]
     private bool onGround = false;
 
     void Start()
@@ -40,19 +35,21 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        //Raycast to check if player is on the ground.
         RaycastHit hit;
 
         onGround = Physics.SphereCast(transform.position, 0.25f, Vector2.down, out hit, hip_height, ground_layer_mask);
-
-        if (Input.GetButtonDown("Jump") && onGround)
-        {
-            Jump();
-        }
 
         float x_dir = Input.GetAxis("Horizontal");
 
         smooth_vector = Vector3.SmoothDamp(smooth_vector, new Vector3(x_dir, 0, 0), ref vel, smoothness);
         current_vector = new Vector3(smooth_vector.x, 0, 0);
+
+        //When spacebar is pressed and the player is on the ground call the jump function.
+        if (Input.GetButtonDown("Jump") && onGround)
+        {
+            Jump();
+        }
     }
 
     void Jump()
