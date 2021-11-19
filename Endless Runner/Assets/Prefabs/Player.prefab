@@ -491,8 +491,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3898875309295980792}
-  m_LocalRotation: {x: 0.07801182, y: 0.80471736, z: -0.1085335, w: 0.5784155}
-  m_LocalPosition: {x: -6.9000015, y: 1.9999999, z: 2.3200006}
+  m_LocalRotation: {x: 0.062253453, y: 0.80737126, z: -0.08660977, w: 0.58032304}
+  m_LocalPosition: {x: -6.9000015, y: 1.5800002, z: 2.3200006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6863698052332133493}
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   smoothness: 0.12
   jump_force: 10
   fall_modifier: 1
-  rotate_speed: 3
+  rotate_speed: 6
   ground_layer_mask:
     serializedVersion: 2
     m_Bits: 128
