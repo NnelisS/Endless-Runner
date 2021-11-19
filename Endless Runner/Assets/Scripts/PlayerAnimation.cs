@@ -6,13 +6,13 @@ public enum LookDirection
 {
     left = 0,
     right,
+    jump,
 }
 
 public enum PlayerState
 {
     idle = 0,
     walking,
-    jumping,
 }
 
 public class PlayerAnimation : MonoBehaviour
@@ -23,11 +23,10 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private float xAxis;
     [SerializeField] private float yAxis;
 
-    private Animator anim;
+    public Animator anim;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
         playerState = PlayerState.idle;
         lookDirection = LookDirection.right;
     }
@@ -60,12 +59,12 @@ public class PlayerAnimation : MonoBehaviour
             lookDirection = LookDirection.right;
         }
         anim.SetFloat("LookDir", (float)lookDirection);
-        anim.SetInteger("Playerstate", (int)playerState);
+        anim.SetInteger("PlayerState", (int)playerState);
     }
     public void setAnimPlayerState(PlayerState state)
     {
         playerState = state;
-        anim.SetInteger("Playerstate", (int)playerState);
+        anim.SetInteger("PlayerState", (int)playerState);
     }
 
     public LookDirection GetDirection()
