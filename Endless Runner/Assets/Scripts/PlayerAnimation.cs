@@ -2,12 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum LookDirection
-{
-    left = 0,
-    right,
-}
-
 public enum PlayerState
 {
     idle = 0,
@@ -17,19 +11,16 @@ public enum PlayerState
 
 public class PlayerAnimation : MonoBehaviour
 {
-    [SerializeField] private LookDirection lookDirection;
     [SerializeField] private PlayerState playerState;
 
     [SerializeField] private float xAxis;
     [SerializeField] private float yAxis;
 
-    private Animator anim;
+    public Animator anim;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
         playerState = PlayerState.idle;
-        lookDirection = LookDirection.right;
     }
 
     void Update()
@@ -53,23 +44,23 @@ public class PlayerAnimation : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            lookDirection = LookDirection.left;
+            playerState = PlayerState.walking;
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            lookDirection = LookDirection.right;
+            playerState = PlayerState.walking;
         }
-        anim.SetFloat("LookDir", (float)lookDirection);
-        anim.SetInteger("Playerstate", (int)playerState);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            playerState = PlayerState.jumping;
+        }
+
+        anim.SetInteger("PlayerState", (int)playerState);
     }
     public void setAnimPlayerState(PlayerState state)
     {
         playerState = state;
-        anim.SetInteger("Playerstate", (int)playerState);
-    }
-
-    public LookDirection GetDirection()
-    {
-        return lookDirection;
+        anim.SetInteger("PlayerState", (int)playerState);
     }
 }

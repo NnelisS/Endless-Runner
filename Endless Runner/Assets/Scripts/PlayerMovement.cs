@@ -57,10 +57,10 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
-        //if (can_rotate)
-        //{
-        //    Rotate();
-        //}
+        if (can_rotate)
+        {
+            Rotate();
+        }
 
     }
 
@@ -82,14 +82,14 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity += Vector3.up * Physics.gravity.y * fall_modifier * Time.fixedDeltaTime;
     }
 
-    //void Rotate()
-    //{
+    void Rotate()
+    {
 
-    //    Quaternion torotation = Quaternion.Euler(0, facing_right ? 90 : 270, 0);
+        Quaternion torotation = Quaternion.Euler(0, facing_right ? 270 : 90, 0);
 
-    //    transform.rotation = Quaternion.Slerp(transform.rotation, torotation, rotate_speed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, torotation, rotate_speed * Time.deltaTime);
 
-    //}
+    }
 
     public void ChangeSpeed(bool ispulling)
     {
