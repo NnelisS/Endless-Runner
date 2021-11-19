@@ -11,16 +11,21 @@ public enum PlayerState
 
 public class PlayerAnimation : MonoBehaviour
 {
-    [SerializeField] private PlayerState playerState;
+    public PlayerState playerState;
 
     [SerializeField] private float xAxis;
     [SerializeField] private float yAxis;
 
     public Animator anim;
 
+    private PlayerMovement playerScript;
+
     void Start()
     {
         playerState = PlayerState.idle;
+
+        playerScript = gameObject.GetComponent<PlayerMovement>();
+
     }
 
     void Update()
@@ -30,28 +35,16 @@ public class PlayerAnimation : MonoBehaviour
 
     public void CheckMovement()
     {
-        xAxis = Input.GetAxis("Horizontal");
-        yAxis = Input.GetAxis("Vertical");
 
-        if (xAxis == 0 && yAxis == 0)
+        if (playerScript.x_dir != 0 && playerScript.is_jumping == false)
+        {
+            playerState = PlayerState.walking;
+        }
+        else if (playerScript.is_jumping == false)
         {
             playerState = PlayerState.idle;
         }
         else
-        {
-            playerState = PlayerState.walking;
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            playerState = PlayerState.walking;
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            playerState = PlayerState.walking;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
         {
             playerState = PlayerState.jumping;
         }

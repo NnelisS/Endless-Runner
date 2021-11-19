@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private float fall_modifier = 5f;
     [SerializeField, Tooltip("Rotate speed.")]
     private float rotate_speed = 5f;
+    [SerializeField, Tooltip("Jump Cooldown.")]
+    private float jump_cooldown = 3f;
 
     [Header("Settings")]
     [SerializeField, Tooltip("Ground Layer Mask.")]
@@ -22,7 +24,9 @@ public class PlayerMovement : MonoBehaviour
     private float hip_height;
 
     private Rigidbody rb;
+    private PlayerAnimation player_animation_script;
 
+    public bool is_jumping = false;
     public bool can_jump = true;
     public bool can_rotate = true;
     public bool facing_right = false;
@@ -33,11 +37,14 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 vel;
 
     private bool on_ground = false;
+
+    private float jump_cooldown_timer;
     
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        player_animation_script = gameObject.GetComponent<PlayerAnimation>();
     }
 
     void Update()
@@ -46,14 +53,19 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
 
         on_ground = Physics.SphereCast(transform.position, 0.25f, Vector2.down, out hit, hip_height, ground_layer_mask);
-
+        if (on_ground)
+        {
+            is_jumping = false;
+        }
          x_dir = Input.GetAxis("Horizontal");
         smooth_vector = Vector3.SmoothDamp(smooth_vector, new Vector3(x_dir, 0, 0), ref vel, smoothness);
         current_vector = new Vector3(smooth_vector.x, 0, 0);
 
+        jump_cooldown_timer += Time.deltaTime;
         //When spacebar is pressed and the player is on the ground call the jump function.
-        if (Input.GetButtonDown("Jump") && on_ground && can_jump)
+        if (Input.GetButtonDown("Jump") && on_ground && can_jump && jump_cooldown_timer >= jump_cooldown)
         {
+            jump_cooldown_timer = 0;
             Jump();
         }
 
@@ -66,6 +78,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
+        is_jumping = true;
+        player_animation_script.playerState = PlayerState.jumping;
         rb.velocity = new Vector3(rb.velocity.x, 0, 0);
         rb.AddForce(Vector2.up * jump_force, ForceMode.Impulse);
     }
