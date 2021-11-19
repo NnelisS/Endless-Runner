@@ -562,6 +562,53 @@ MonoBehaviour:
   box_mask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!1 &1640912133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1640912135}
+  - component: {fileID: 1640912136}
+  m_Layer: 0
+  m_Name: WindPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1640912135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640912133}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 39.54, y: 10.93, z: 58.41}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1640912136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640912133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12ac833f2d771049a164da5fdf55b8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start_pos: {x: 39.54, y: 10.93, z: 58.41}
+  random_pos: {x: 0, y: 10}
+  random_time: {x: 1, y: 2}
+  wind_prefab: {fileID: 5044364747404341919, guid: 64aa0a6112e4cf34aa9c19e21fb603ff, type: 3}
 --- !u!1001 &1849069487
 PrefabInstance:
   m_ObjectHideFlags: 0
