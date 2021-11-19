@@ -11,6 +11,7 @@ public class Transitioner : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Transition"))
         {
+            Debug.Log("YEs");
             cineChange.Play("ChangeBody");
         }
     }
