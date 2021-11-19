@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 vel;
 
 
-    private bool facing_right = true;
+    private bool facing_right = false;
     private bool on_ground = false;
 
     void Start()
