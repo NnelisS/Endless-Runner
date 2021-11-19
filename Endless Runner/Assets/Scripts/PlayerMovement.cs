@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Attributes")]
-    [SerializeField, Tooltip("Player's max speed.")] 
-    private float max_speed = 6.5f;
+    public float max_speed = 6.5f;
     [SerializeField, Tooltip("Smoothness of the movement.")]
     private float smoothness = 0.12f;
     [SerializeField, Tooltip("Jump Force.")]
@@ -24,14 +23,17 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
 
+    public bool can_jump = true;
+    public bool can_rotate = true;
+    public bool facing_right = false;
+    public float x_dir;
+
     private Vector3 current_vector;
     private Vector3 smooth_vector;
-    private float x_dir;
     private Vector3 vel;
 
-
-    private bool facing_right = false;
     private bool on_ground = false;
+    
 
     void Start()
     {
@@ -50,12 +52,16 @@ public class PlayerMovement : MonoBehaviour
         current_vector = new Vector3(smooth_vector.x, 0, 0);
 
         //When spacebar is pressed and the player is on the ground call the jump function.
-        if (Input.GetButtonDown("Jump") && on_ground)
+        if (Input.GetButtonDown("Jump") && on_ground && can_jump)
         {
             Jump();
         }
 
-        Rotate();
+        if (can_rotate)
+        {
+            Rotate();
+        }
+
     }
 
     void Jump()
@@ -65,9 +71,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate()
-    { 
+    {
 
-        if((x_dir > 0 && facing_right) || (x_dir < 0 && !facing_right))
+        if (((x_dir > 0 && facing_right) || (x_dir < 0 && !facing_right)) && can_rotate)
         {
             facing_right = !facing_right;
         }
@@ -85,10 +91,9 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void OnDrawGizmos()
+    public void ChangeSpeed(bool ispulling)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * hip_height);
+        max_speed = ispulling ? 2f : 6.5f;
     }
 
 }
