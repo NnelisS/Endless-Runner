@@ -304,7 +304,7 @@ Cloth:
   - maxDistance: 0
     collisionSphereDistance: 3.4028235e+38
   m_CapsuleColliders:
-  - {fileID: 3844761924050423189}
+  - {fileID: 0}
   m_SphereColliders: []
   m_SelfCollisionDistance: 0
   m_SelfCollisionStiffness: 0.2
@@ -1271,6 +1271,7 @@ GameObject:
   - component: {fileID: 7810147790121815652}
   - component: {fileID: 2710966540801337621}
   - component: {fileID: 6094251341548550185}
+  - component: {fileID: 2572926723415512411}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1343,7 +1344,7 @@ MonoBehaviour:
   jump_force: 9
   fall_modifier: 1
   rotate_speed: 6
-  jump_cooldown: 3
+  jump_cooldown: 1.5
   ground_layer_mask:
     serializedVersion: 2
     m_Bits: 128
@@ -1382,6 +1383,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cineChange: {fileID: 857333354136270301}
+--- !u!114 &2572926723415512411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7810147790121815653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25543842e9391c84bbbd7fdce7d4db46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 1
+  offset: {x: 1.5, y: 0, z: 0}
+  box_mask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &7832653522036841569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,7 +1473,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4389236019238541188}
-  - component: {fileID: 3844761924050423189}
   m_Layer: 0
   m_Name: SjaalCollider
   m_TagString: Untagged
@@ -1477,20 +1494,6 @@ Transform:
   m_Father: {fileID: 7433446982946067679}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &3844761924050423189
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8497591238396418356}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.23155582
-  m_Height: 1.8646817
-  m_Direction: 1
-  m_Center: {x: -0.0029435158, y: -0.17836809, z: -0.005571246}
 --- !u!1 &8833811815733578572
 GameObject:
   m_ObjectHideFlags: 0
