@@ -8,29 +8,10 @@ public class SceneSwitch : MonoBehaviour
 {
     public GameObject LoadingScreen;
     public Slider loadingBar;
-    public GameObject closeScene;
-
-    public float timer = 2.0f;
-
-    public float scale;
-
-    private void Update()
-    {
-        Time.timeScale = scale;
-    }
 
     public void PlayGame(int levelIndex)
     {
-        WaitForSceneSwitch(levelIndex);  
-    }
-
-    public void WaitForSceneSwitch(int levelIndex)
-    {
-        closeScene.SetActive(true);
- /*        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("YourAnimationName"))
-         {
-
-         }*/
+        StartCoroutine(LoadSceneAsynchronously(levelIndex));
     }
 
     IEnumerator LoadSceneAsynchronously(int levelIndex)
