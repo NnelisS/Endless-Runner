@@ -3,6 +3,7 @@ using UnityEngine;
 
 public enum SceneIndexes
 {
-    TITLE_SCREEN = 0,
-    MAP,
+    MANAGER = 0,
+    TITLE_SCREEN = 1,
+    MAP = 2,
 } 
