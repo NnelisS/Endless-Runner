@@ -17,6 +17,7 @@ public class PushPull : MonoBehaviour
 
     private GameObject box;
     private bool is_pulling;
+    private bool can_push = false;
 
     void Start()
     {
@@ -34,7 +35,21 @@ public class PushPull : MonoBehaviour
         {
             if (box != null) 
             {
-                box.transform.position = new Vector3(transform.position.x + (movement_script.facing_right ? -offset.x : offset.x), 0, 0);
+                if(can_push == true)
+                {
+                    movement_script.can_move = true;
+                    box.transform.position = new Vector3(transform.position.x + (movement_script.facing_right ? -offset.x : offset.x), offset.y, 0);
+                }
+                else
+                {
+                    movement_script.can_move = false;
+                    rb.MovePosition((new Vector3(box.transform.position.x - (movement_script.facing_right ? -offset.x : offset.x),0,0)));
+                    if(transform.position.x == (box.transform.position.x - (movement_script.facing_right ? -offset.x : offset.x)))
+                    {
+                        can_push = true;
+                    }
+                }
+
             }
 
         }
@@ -42,10 +57,14 @@ public class PushPull : MonoBehaviour
         if(is_hit && Input.GetKeyDown(KeyCode.LeftShift))
         {
             box = hit.collider.gameObject;
+            is_pulling = !is_pulling;
             SwitchPushPullState();
         }
         else if(is_pulling && Input.GetKeyUp(KeyCode.LeftShift))
         {
+            is_pulling = !is_pulling;
+            movement_script.can_move = true;
+            can_push = false;
             SwitchPushPullState();
             box = null;
         }
@@ -55,9 +74,13 @@ public class PushPull : MonoBehaviour
     {
         movement_script.can_rotate = !movement_script.can_rotate;
         movement_script.can_jump = !movement_script.can_jump;
-
-        is_pulling = !is_pulling;
         movement_script.ChangeSpeed(is_pulling);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * movement_script.x_dir * distance);
     }
 
 

@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     public bool can_jump = true;
     public bool can_rotate = true;
     public bool facing_right = false;
+    public bool can_move = true;
     public float x_dir;
 
     private Vector3 current_vector;
@@ -91,8 +92,10 @@ public class PlayerMovement : MonoBehaviour
         {
             facing_right = !facing_right;
         }
-
-        rb.MovePosition(transform.position + (current_vector * max_speed * Time.fixedDeltaTime));
+        if (can_move)
+        {
+            rb.MovePosition(transform.position + (current_vector * max_speed * Time.fixedDeltaTime));
+        }
         rb.velocity += Vector3.up * Physics.gravity.y * fall_modifier * Time.fixedDeltaTime;
     }
 

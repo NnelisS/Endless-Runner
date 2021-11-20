@@ -7,6 +7,7 @@ public enum PlayerState
     idle = 0,
     walking,
     jumping,
+    pushing,
 }
 
 public class PlayerAnimation : MonoBehaviour
@@ -36,17 +37,21 @@ public class PlayerAnimation : MonoBehaviour
     public void CheckMovement()
     {
 
-        if (playerScript.x_dir != 0 && playerScript.is_jumping == false)
+        if (playerScript.x_dir != 0 && playerScript.is_jumping == false && playerScript.can_rotate == true)
         {
             playerState = PlayerState.walking;
         }
-        else if (playerScript.is_jumping == false)
+        else if (playerScript.is_jumping)
         {
-            playerState = PlayerState.idle;
+            playerState = PlayerState.jumping;
+        }
+        else if (playerScript.can_rotate == false)
+        {
+            playerState = PlayerState.pushing;
         }
         else
         {
-            playerState = PlayerState.jumping;
+            playerState = PlayerState.idle;
         }
 
         anim.SetInteger("PlayerState", (int)playerState);

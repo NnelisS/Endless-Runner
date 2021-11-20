@@ -381,6 +381,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1940774821}
     - target: {fileID: 2572926723415512411, guid: 6898557804cf1034fa8e13c521268f76, type: 3}
+      propertyPath: offset.y
+      value: -0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2572926723415512411, guid: 6898557804cf1034fa8e13c521268f76, type: 3}
       propertyPath: box_mask.m_Bits
       value: 64
       objectReference: {fileID: 0}
@@ -548,7 +552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2167742763697221689, guid: 329707d7d220fbc45a0454412d9da108, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.174473
+      value: 4.55
       objectReference: {fileID: 0}
     - target: {fileID: 2167742763697221689, guid: 329707d7d220fbc45a0454412d9da108, type: 3}
       propertyPath: m_LocalPosition.y

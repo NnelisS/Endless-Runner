@@ -1353,6 +1353,7 @@ MonoBehaviour:
   can_jump: 1
   can_rotate: 1
   facing_right: 0
+  can_move: 1
   x_dir: 0
 --- !u!114 &2710966540801337621
 MonoBehaviour:
@@ -1395,7 +1396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25543842e9391c84bbbd7fdce7d4db46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 1
+  distance: 1.5
   offset: {x: 1.5, y: 0, z: 0}
   box_mask:
     serializedVersion: 2
