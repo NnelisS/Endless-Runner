@@ -8,6 +8,7 @@ public enum PlayerState
     walking,
     jumping,
     pushing,
+    slide,
 }
 
 public class PlayerAnimation : MonoBehaviour
