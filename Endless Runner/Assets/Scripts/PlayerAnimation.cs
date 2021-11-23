@@ -39,13 +39,17 @@ public class PlayerAnimation : MonoBehaviour
     public void CheckMovement()
     {
 
-        if (playerScript.x_dir != 0 && playerScript.is_jumping == false && playerScript.can_rotate == true)
+        if (playerScript.x_dir != 0 && playerScript.is_jumping == false && playerScript.can_rotate == true && playerScript.is_sliding == false)
         {
             playerState = PlayerState.walking;
         }
         else if (playerScript.is_jumping)
         {
             playerState = PlayerState.jumping;
+        }
+        else if (playerScript.is_sliding)
+        {
+            playerState = PlayerState.slide;
         }
         else if (playerScript.can_rotate == false)
         {
