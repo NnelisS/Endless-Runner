@@ -89,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         is_jumping = true;
-        player_animation_script.playerState = PlayerState.jumping;
         rb.velocity = new Vector3(rb.velocity.x, 0, 0);
         rb.AddForce(Vector2.up * jump_force, ForceMode.Impulse);
     }
