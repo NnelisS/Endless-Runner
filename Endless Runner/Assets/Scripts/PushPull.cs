@@ -29,7 +29,7 @@ public class PushPull : MonoBehaviour
     {
         RaycastHit hit;
 
-        bool is_hit = Physics.Raycast(transform.position, Vector3.right * movement_script.x_dir, out hit, distance, box_mask);
+        bool is_hit = Physics.Raycast(transform.position, Vector3.right * (movement_script.facing_right ? -1 : 1), out hit, distance, box_mask);
 
         if (is_pulling)
         {
@@ -80,7 +80,7 @@ public class PushPull : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * movement_script.x_dir * distance);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * (movement_script.facing_right ? -1 : 1) * distance);
     }
 
 

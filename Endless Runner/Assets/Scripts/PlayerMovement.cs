@@ -63,6 +63,13 @@ public class PlayerMovement : MonoBehaviour
         current_vector = new Vector3(smooth_vector.x, 0, 0);
 
         jump_cooldown_timer += Time.deltaTime;
+
+
+        if (((x_dir > 0 && facing_right) || (x_dir < 0 && !facing_right)) && can_rotate)
+        {
+            facing_right = !facing_right;
+        }
+
         //When spacebar is pressed and the player is on the ground call the jump function.
         if (Input.GetButtonDown("Jump") && on_ground && can_jump && jump_cooldown_timer >= jump_cooldown)
         {
@@ -74,6 +81,8 @@ public class PlayerMovement : MonoBehaviour
         {
             Rotate();
         }
+
+
 
     }
 
@@ -87,16 +96,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        if (((x_dir > 0 && facing_right) || (x_dir < 0 && !facing_right)) && can_rotate)
-        {
-            facing_right = !facing_right;
-        }
         if (can_move)
         {
-            rb.MovePosition(transform.position + (current_vector * max_speed * Time.fixedDeltaTime));
+            rb.MovePosition(transform.position + (current_vector * max_speed * Time.deltaTime));
         }
-        rb.velocity += Vector3.up * Physics.gravity.y * fall_modifier * Time.fixedDeltaTime;
+
+        rb.velocity += Vector3.up * Physics.gravity.y * fall_modifier * Time.deltaTime;
     }
 
     void Rotate()
