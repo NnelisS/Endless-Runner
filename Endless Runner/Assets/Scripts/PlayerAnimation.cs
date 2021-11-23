@@ -9,6 +9,7 @@ public enum PlayerState
     jumping,
     pushing,
     slide,
+    push_idle,
 }
 
 public class PlayerAnimation : MonoBehaviour
