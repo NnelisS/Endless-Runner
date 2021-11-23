@@ -77,11 +77,5 @@ public class PushPull : MonoBehaviour
         movement_script.ChangeSpeed(is_pulling);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * (movement_script.facing_right ? -1 : 1) * distance);
-    }
-
 
 }
