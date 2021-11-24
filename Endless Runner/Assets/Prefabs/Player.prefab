@@ -1144,14 +1144,18 @@ MonoBehaviour:
   smoothness: 0.12
   jump_force: 9
   fall_modifier: 1
+  slide_force: 10
   rotate_speed: 6
   jump_cooldown: 1.5
+  slide_cooldown: 2.5
   ground_layer_mask:
     serializedVersion: 2
     m_Bits: 128
   hip_height: 1.25
   is_jumping: 0
+  is_sliding: 0
   can_jump: 1
+  can_slide: 1
   can_rotate: 1
   facing_right: 0
   can_move: 1
