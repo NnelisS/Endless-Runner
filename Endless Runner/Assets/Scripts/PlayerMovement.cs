@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private float hip_height;
 
     private Rigidbody rb;
-    private PlayerAnimation player_animation_script;
+    private CapsuleCollider cc;
 
     public bool is_jumping = false;
     public bool is_sliding = false;
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        player_animation_script = gameObject.GetComponent<PlayerAnimation>();
+        cc = gameObject.GetComponent<CapsuleCollider>();
     }
 
     void Update()
@@ -106,11 +106,13 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Slide()
     {
         float current_direction = facing_right ? -1 : 1;
+        cc.height = 1.5f;
         rb.AddForce(Vector2.right * current_direction * slide_force, ForceMode.Impulse);
         yield return new WaitForSeconds(0.7f);
         can_jump = true;
         can_rotate = true;
         can_move = true;
+        cc.height = 2.5f;
         yield return new WaitForSeconds(0.6f);
         is_sliding = false;
 

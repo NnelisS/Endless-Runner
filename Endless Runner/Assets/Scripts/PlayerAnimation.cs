@@ -10,6 +10,7 @@ public enum PlayerState
     pushing,
     slide,
     push_idle,
+    pushing_backwards
 }
 
 public class PlayerAnimation : MonoBehaviour
@@ -41,6 +42,7 @@ public class PlayerAnimation : MonoBehaviour
 
         if (playerScript.x_dir != 0 && playerScript.is_jumping == false && playerScript.can_rotate == true && playerScript.is_sliding == false)
         {
+
             playerState = PlayerState.walking;
         }
         else if (playerScript.is_jumping)
@@ -53,15 +55,59 @@ public class PlayerAnimation : MonoBehaviour
         }
         else if (playerScript.can_rotate == false)
         {
-            playerState = PlayerState.pushing;
+            if (playerScript.x_dir == 0)
+            {
+                playerState = PlayerState.push_idle;
+            }
+            else if (playerScript.facing_right)
+            {
+                if (playerScript.x_dir < 0)
+                {
+                    playerState = PlayerState.pushing;
+                }
+                else
+                {
+                    playerState = PlayerState.pushing_backwards;
+                }
+            }
+            else
+            {
+                if (playerScript.x_dir < 0)
+                {
+                    playerState = PlayerState.pushing_backwards;
+                }
+                else
+                {
+                    playerState = PlayerState.pushing;
+                }
+            }
+        }   
+
+
+
+        else if (playerScript.can_rotate == false && playerScript.x_dir >= 0)
+        {
+            if (playerScript.facing_right)
+            {
+                playerState = PlayerState.pushing;
+            }
+
+        }
+        else if (playerScript.can_rotate == false & playerScript.x_dir <= 0)
+        {
+            playerState = PlayerState.pushing_backwards;
         }
         else
         {
             playerState = PlayerState.idle;
         }
 
+
+
+
         anim.SetInteger("PlayerState", (int)playerState);
     }
+
     public void setAnimPlayerState(PlayerState state)
     {
         playerState = state;
