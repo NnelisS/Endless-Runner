@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Tooltip("Jump Cooldown.")]
     private float jump_cooldown = 2f;
     [SerializeField, Tooltip("Slide Cooldown.")]
-    private float slide_cooldown = 3f;
+    private float slide_cooldown = 2.5f;
 
     [Header("Settings")]
     [SerializeField, Tooltip("Ground Layer Mask.")]
@@ -45,7 +45,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool on_ground = false;
 
-    private float cooldown_timer;
+    private float slide_cooldown_timer;
+    private float jump_cooldown_timer;
 
 
 
@@ -69,17 +70,17 @@ public class PlayerMovement : MonoBehaviour
         smooth_vector = Vector3.SmoothDamp(smooth_vector, new Vector3(x_dir, 0, 0), ref vel, smoothness);
         current_vector = new Vector3(smooth_vector.x, 0, 0);
 
-        cooldown_timer += Time.deltaTime;
-
+        slide_cooldown_timer += Time.deltaTime;
+        jump_cooldown_timer += Time.deltaTime;
 
         if (((x_dir > 0 && facing_right) || (x_dir < 0 && !facing_right)) && can_rotate)
         {
             facing_right = !facing_right;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) && can_slide && cooldown_timer >= slide_cooldown)
+        if (Input.GetKeyDown(KeyCode.LeftControl)&& x_dir != 0 && can_slide && slide_cooldown_timer >= slide_cooldown)
         {
-            cooldown_timer = 0;
+            slide_cooldown_timer = 0;
             is_sliding = true;
             can_jump = false;
             can_rotate = false;
@@ -88,9 +89,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //When spacebar is pressed and the player is on the ground call the jump function.
-        if (Input.GetButtonDown("Jump") && on_ground && can_jump && cooldown_timer >= jump_cooldown)
+        if (Input.GetButtonDown("Jump") && on_ground && can_jump && jump_cooldown_timer >= jump_cooldown)
         {
-            cooldown_timer = 0;
+            jump_cooldown_timer = 0;
             Jump();
         }
 

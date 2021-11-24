@@ -743,7 +743,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7810147790121815652, guid: 6898557804cf1034fa8e13c521268f76, type: 3}
       propertyPath: slide_cooldown
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7810147790121815653, guid: 6898557804cf1034fa8e13c521268f76, type: 3}
       propertyPath: m_Name
