@@ -10,22 +10,17 @@ public class GameManager : MonoBehaviour
     public bool playing = false;
     private float timer;
 
-    public Animator playerAnim;
-
-    public GameObject holdDPanel;
-    private bool dPanelOff = false;
+    public GameObject pausePanel;
 
     private void Update()
     {
-        HoldD();
-
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            dPanelOff = true;
-        }
-        else
-        {
-            playerAnim.StopPlayback();
+            pausePanel.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                pausePanel.SetActive(false);
+            }
         }
 
         if (playing)
@@ -36,15 +31,5 @@ public class GameManager : MonoBehaviour
             int milliseconds = Mathf.FloorToInt((timer * 100F) % 100F);
             timerText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("00");
         }
-
-        if (dPanelOff)
-        {
-            holdDPanel.SetActive(false);
-        }
-    }
-
-    private void HoldD()
-    {
-        holdDPanel.SetActive(true);   
     }
 }

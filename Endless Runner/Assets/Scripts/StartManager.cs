@@ -10,6 +10,8 @@ public class StartManager : MonoBehaviour
     public Animator toolTips;
     public Animator toolTipJump;
 
+    public GameManager gameManager;
+
     public float timer = 5.0f;
     public bool timerOn = false;
 
@@ -40,5 +42,6 @@ public class StartManager : MonoBehaviour
         startFade.Play("Fade");
         toolTips.Play("Movement_Tooltip");
         toolTipJump.Play("Jump_Tooltip");
+        gameManager.playing = true;
     }
 }
