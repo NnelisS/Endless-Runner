@@ -38,12 +38,12 @@ public class PushPull : MonoBehaviour
                 if(can_push == true)
                 {
                     movement_script.can_move = true;
-                    box.transform.position = new Vector3(transform.position.x + (movement_script.facing_right ? -offset.x : offset.x), offset.y, 0);
+                    box.transform.position = new Vector3(transform.position.x + (movement_script.facing_right ? -offset.x : offset.x), transform.position.y - offset.y, -238); ;
                 }
                 else
                 {
                     movement_script.can_move = false;
-                    rb.MovePosition((new Vector3(box.transform.position.x - (movement_script.facing_right ? -offset.x : offset.x),0,0)));
+                    rb.MovePosition((new Vector3(box.transform.position.x - (movement_script.facing_right ? -offset.x : offset.x),transform.position.y, transform.position.z)));
                     if(transform.position.x == (box.transform.position.x - (movement_script.facing_right ? -offset.x : offset.x)))
                     {
                         can_push = true;

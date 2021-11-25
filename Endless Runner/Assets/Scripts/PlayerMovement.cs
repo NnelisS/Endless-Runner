@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ChangeSpeed(bool ispulling)
     {
-        max_speed = ispulling ? 2f : 6.5f;
+        max_speed = ispulling ? 3f : 6.5f;
     }
 
 }
