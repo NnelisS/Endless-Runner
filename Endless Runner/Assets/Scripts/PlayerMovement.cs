@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Attributes")]
     public float max_speed = 6.5f;
+    [SerializeField, Tooltip("Push Speed.")]
+    private float push_speed = 2.5f;
     [SerializeField, Tooltip("Smoothness of the movement.")]
     private float smoothness = 0.12f;
     [SerializeField, Tooltip("Jump Force.")]
@@ -29,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private CapsuleCollider cc;
+    private PushPull push_script;
 
     public bool is_jumping = false;
     public bool is_sliding = false;
@@ -54,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
         cc = gameObject.GetComponent<CapsuleCollider>();
+        push_script = gameObject.GetComponent<PushPull>();
     }
 
     void Update()
@@ -78,13 +82,14 @@ public class PlayerMovement : MonoBehaviour
             facing_right = !facing_right;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl)&& x_dir != 0 && can_slide && slide_cooldown_timer >= slide_cooldown)
+        if (Input.GetKeyDown(KeyCode.LeftControl)&& x_dir != 0 && is_sliding == false && can_slide && slide_cooldown_timer >= slide_cooldown)
         {
             slide_cooldown_timer = 0;
             is_sliding = true;
             can_jump = false;
             can_rotate = false;
             can_move = false;
+            push_script.can_start_push = false;
             StartCoroutine(Slide());
         }
 
@@ -114,9 +119,11 @@ public class PlayerMovement : MonoBehaviour
         can_jump = true;
         can_rotate = true;
         can_move = true;
+        
         cc.center = new Vector3(0, 0, 0);
         cc.height = 2.5f;
         yield return new WaitForSeconds(0.6f);
+        push_script.can_start_push = true;
         is_sliding = false;
 
     }
@@ -150,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ChangeSpeed(bool ispulling)
     {
-        max_speed = ispulling ? 3f : 6.5f;
+        max_speed = ispulling ? push_speed : 6.5f;
     }
 
 }

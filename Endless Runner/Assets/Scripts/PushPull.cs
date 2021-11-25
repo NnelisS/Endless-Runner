@@ -19,6 +19,8 @@ public class PushPull : MonoBehaviour
     private bool is_pulling;
     private bool can_push = false;
 
+    public bool can_start_push = true;
+
     void Start()
     {
         movement_script = gameObject.GetComponent<PlayerMovement>();
@@ -31,23 +33,27 @@ public class PushPull : MonoBehaviour
 
         bool is_hit = Physics.Raycast(transform.position, Vector3.right * (movement_script.facing_right ? -1 : 1), out hit, distance, box_mask);
 
-        if (is_pulling)
+        if (can_start_push)
         {
-            if (box != null) 
+            if (is_pulling)
             {
-                if(can_push == true)
+                if (box != null)
                 {
-                    movement_script.can_move = true;
-                    box.transform.position = new Vector3(transform.position.x + (movement_script.facing_right ? -offset.x : offset.x), transform.position.y - offset.y, -238); ;
-                }
-                else
-                {
-                    movement_script.can_move = false;
-                    rb.MovePosition((new Vector3(box.transform.position.x - (movement_script.facing_right ? -offset.x : offset.x),transform.position.y, transform.position.z)));
-                    if(transform.position.x == (box.transform.position.x - (movement_script.facing_right ? -offset.x : offset.x)))
+                    if (can_push == true)
                     {
-                        can_push = true;
+                        movement_script.can_move = true;
+                        box.transform.position = new Vector3(transform.position.x + (movement_script.facing_right ? -offset.x : offset.x), transform.position.y - offset.y, -238); ;
                     }
+                    else
+                    {
+                        movement_script.can_move = false;
+                        rb.MovePosition((new Vector3(box.transform.position.x - (movement_script.facing_right ? -offset.x : offset.x), transform.position.y, transform.position.z)));
+                        if (transform.position.x == (box.transform.position.x - (movement_script.facing_right ? -offset.x : offset.x)))
+                        {
+                            can_push = true;
+                        }
+                    }
+
                 }
 
             }
