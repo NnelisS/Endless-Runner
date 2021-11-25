@@ -7,6 +7,8 @@ public class StartManager : MonoBehaviour
     public Animator virtualCamera;
     public Animator playerCharacter;
     public Animator startFade;
+    public Animator toolTips;
+    public Animator toolTipJump;
 
     public float timer = 5.0f;
     public bool timerOn = false;
@@ -36,5 +38,7 @@ public class StartManager : MonoBehaviour
         playerCharacter.Play("Standing Up");
         virtualCamera.Play("StartScene");
         startFade.Play("Fade");
+        toolTips.Play("Movement_Tooltip");
+        toolTipJump.Play("Jump_Tooltip");
     }
 }
