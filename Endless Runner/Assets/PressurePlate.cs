@@ -11,6 +11,9 @@ public class PressurePlate : MonoBehaviour
 
     private float start_y_pos;
 
+    public Animator gateOpen;
+    public Animator gateOpenCutscene;
+
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -24,6 +27,9 @@ public class PressurePlate : MonoBehaviour
         if (did_press)
         {
             rb.MovePosition((new Vector3(transform.position.x, start_y_pos - 0.20f, transform.position.z)));
+            gateOpen.Play("GateOpen");
+            gateOpenCutscene.Play("GateOpenCutscene");
+            did_press = false;
         }
     }
 
