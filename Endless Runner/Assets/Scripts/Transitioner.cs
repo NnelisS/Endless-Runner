@@ -9,6 +9,11 @@ public class Transitioner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("TransitionStair"))
+        {
+            cineChange.Play("Stair");
+        }
+
         if (other.gameObject.CompareTag("Transition"))
         {
             cineChange.Play("ChangeBody");
@@ -17,6 +22,11 @@ public class Transitioner : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.gameObject.CompareTag("TransitionStair"))
+        {
+            cineChange.Play("Stair Back");
+        }
+
         if (other.gameObject.CompareTag("Transition"))
         {
             cineChange.Play("ChangeBodyBack");
