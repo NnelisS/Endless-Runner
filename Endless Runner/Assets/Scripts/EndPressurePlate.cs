@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EndPressurePlate : MonoBehaviour
 {
-    private bool did_press;
+    private bool did_press = false;
 
     private Rigidbody rb;
 

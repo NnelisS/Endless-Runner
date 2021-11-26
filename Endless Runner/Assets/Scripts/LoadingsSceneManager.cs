@@ -25,6 +25,7 @@ public class LoadingsSceneManager : MonoBehaviour
 
         sceneLoading.Add(SceneManager.UnloadSceneAsync((int)SceneIndexes.TITLE_SCREEN));
         sceneLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndexes.MAP, LoadSceneMode.Additive));
+        sceneLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndexes.ENDCUTSCENE));
 
         StartCoroutine(GetSceneLoadProgress());
     }
