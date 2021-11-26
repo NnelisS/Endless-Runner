@@ -8,6 +8,7 @@ TagManager:
   - TransitionStair
   - Death
   - CheckPointTwo
+  - Platform
   layers:
   - Default
   - TransparentFX
