@@ -80,6 +80,7 @@ public class PushPull : MonoBehaviour
     {
         movement_script.can_rotate = !movement_script.can_rotate;
         movement_script.can_jump = !movement_script.can_jump;
+        movement_script.can_slide = !movement_script.can_slide;
         movement_script.ChangeSpeed(is_pulling);
     }
 
