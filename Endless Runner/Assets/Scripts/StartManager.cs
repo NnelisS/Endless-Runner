@@ -24,6 +24,7 @@ public class StartManager : MonoBehaviour
 
     private void Update()
     {
+        //not able to walk untill the animations are done
         if (timerOn)
         {
             timer -= Time.deltaTime;
@@ -34,6 +35,8 @@ public class StartManager : MonoBehaviour
         }
     }
 
+
+    //trigger for button so the game starts
     public void StartGame()
     {
         timerOn = true;

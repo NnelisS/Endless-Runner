@@ -8,6 +8,8 @@ public class BoxReset : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // if box falls off island it resets to it's first position
+
         if (other.gameObject.CompareTag("Death"))
         {
             transform.position = boxPosition.transform.position;

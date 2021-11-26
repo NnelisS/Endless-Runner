@@ -20,6 +20,7 @@ public class EndPressurePlate : MonoBehaviour
 
     private void Update()
     {
+        // if bool is true scene changes to end scene
         if (did_press)
         {
             rb.MovePosition((new Vector3(transform.position.x, start_y_pos - 0.20f, transform.position.z)));

@@ -8,6 +8,7 @@ public class Transitioner : MonoBehaviour
     public Animator cineChange;
     public Animator scene;
 
+    //Starts the animation for a camera transition
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("TransitionStair"))
@@ -22,6 +23,7 @@ public class Transitioner : MonoBehaviour
         }
     }
 
+    //exits the animation and puts it back to the normal camera position
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("TransitionStair"))

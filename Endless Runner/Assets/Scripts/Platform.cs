@@ -16,6 +16,7 @@ public class Platform : MonoBehaviour
 
     private void Update()
     {
+        // if the box collider is off it's stops getting stuck
         if (boxCol.enabled == false)
         {
             player.transform.parent = null;
@@ -25,6 +26,7 @@ public class Platform : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // player is stuck to the moving platform
         if (other.gameObject == player)
         {
             player.transform.parent = transform;
@@ -37,6 +39,7 @@ public class Platform : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        // player is no longer stuck to the moving platform
         if (other.gameObject == player)
         {
             player.transform.parent = null;

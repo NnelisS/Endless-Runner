@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+//indexes the scene changer uses for loading screen
 public enum SceneIndexes
 {
     MANAGER = 0,

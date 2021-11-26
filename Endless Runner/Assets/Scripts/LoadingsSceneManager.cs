@@ -23,6 +23,7 @@ public class LoadingsSceneManager : MonoBehaviour
     {
         loadingScreen.gameObject.SetActive(true);
 
+        // all scenes it needs to load or unload
         sceneLoading.Add(SceneManager.UnloadSceneAsync((int)SceneIndexes.TITLE_SCREEN));
         sceneLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndexes.MAP, LoadSceneMode.Additive));
         sceneLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndexes.ENDCUTSCENE));
@@ -32,6 +33,7 @@ public class LoadingsSceneManager : MonoBehaviour
 
     public IEnumerator GetSceneLoadProgress()
     {
+        // scene changer with loading screen
         for (int i = 0; i < sceneLoading.Count; i++)
         {
             while (!sceneLoading[i].isDone)

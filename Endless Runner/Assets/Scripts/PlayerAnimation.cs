@@ -39,7 +39,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void CheckMovement()
     {
-
+        //change animation state on movement state
         if (playerScript.x_dir != 0 && playerScript.is_jumping == false && playerScript.can_rotate == true && playerScript.is_sliding == false)
         {
 
@@ -84,7 +84,7 @@ public class PlayerAnimation : MonoBehaviour
         }   
 
 
-
+        //change the animation to push animation when it's using the push box
         else if (playerScript.can_rotate == false && playerScript.x_dir >= 0)
         {
             if (playerScript.facing_right)

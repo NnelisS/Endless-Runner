@@ -33,13 +33,12 @@ public class Death : MonoBehaviour
 
                 closeScene.Play("OpenScene");
 
+                //checks what checkpoint it's on and then chooses that one to spawn to after he dies
                 if (spawnOnCheckPoint)
                 {
                     player.transform.position = checkPointOne.transform.position;
                     player.transform.localRotation = Quaternion.Euler(transform.rotation.x, -90f, transform.rotation.z);
-
                 }
-
                 if (spawnOnCheckPointTwo)
                 {
                     player.transform.position = checkPointTwo.transform.position;
@@ -51,6 +50,7 @@ public class Death : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // if the player falls off the map into the death collider it plays the death animation and spawn at the last checkpoint it got to
         if (other.gameObject.CompareTag("Death"))
         {
             deathFall.Play(0);
@@ -65,6 +65,7 @@ public class Death : MonoBehaviour
             }
         }
 
+        // if the player goes into checkpoint 2 it changes death respawn position
         if (other.gameObject.CompareTag("CheckPointTwo"))
         {
             spawnOnCheckPoint = false;

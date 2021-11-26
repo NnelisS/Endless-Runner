@@ -14,6 +14,7 @@ public class SceneSwitch : MonoBehaviour
         StartCoroutine(LoadSceneAsynchronously(levelIndex));
     }
 
+    //change the first scene with a loading screen
     IEnumerator LoadSceneAsynchronously(int levelIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(levelIndex);
