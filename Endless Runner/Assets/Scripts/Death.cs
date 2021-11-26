@@ -8,8 +8,10 @@ public class Death : MonoBehaviour
     public Animator death;
     public Animator closeScene;
 
+    public AudioSource deathFall;
+
     private bool timerOn = false;
-    private float spawnTimer = 2.0f;
+    private float spawnTimer = 1.0f;
     public GameObject player;
 
     public bool checkPointOneOn = true;
@@ -28,7 +30,7 @@ public class Death : MonoBehaviour
             if (spawnTimer <= 0f)
             {
                 timerOn = false;
-                spawnTimer = 2.0f;
+                spawnTimer = 1.0f;
 
                 /*death.Play("Undeath");*/
                 closeScene.Play("OpenScene");
@@ -53,6 +55,7 @@ public class Death : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Death"))
         {
+            deathFall.Play(0);
             closeScene.Play("CloseScene");
             /*death.Play("Death");*/
             if (checkPointOneOn)
