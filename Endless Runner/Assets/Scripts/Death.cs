@@ -5,7 +5,6 @@ using UnityEngine.Animations;
 
 public class Death : MonoBehaviour
 {
-    public Animator death;
     public Animator closeScene;
 
     public AudioSource deathFall;
@@ -32,7 +31,6 @@ public class Death : MonoBehaviour
                 timerOn = false;
                 spawnTimer = 1.0f;
 
-                /*death.Play("Undeath");*/
                 closeScene.Play("OpenScene");
 
                 if (spawnOnCheckPoint)
@@ -57,7 +55,6 @@ public class Death : MonoBehaviour
         {
             deathFall.Play(0);
             closeScene.Play("CloseScene");
-            /*death.Play("Death");*/
             if (checkPointOneOn)
             {
                 timerOn = true;
