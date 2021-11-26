@@ -24,7 +24,7 @@ public class EndPressurePlate : MonoBehaviour
         {
             rb.MovePosition((new Vector3(transform.position.x, start_y_pos - 0.20f, transform.position.z)));
             did_press = false;
-            SceneManager.LoadScene("EndCutscene");
+            SceneManager.LoadScene("Endscene");
         }
     }
 
